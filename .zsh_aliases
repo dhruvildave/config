@@ -1,0 +1,5 @@
+alias data='cd /mnt/4427FDEE206BF5AE/'
+
+alias codes='cd /mnt/4427FDEE206BF5AE/Documents/codes'
+
+alias x='xelatex'
