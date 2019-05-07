@@ -17,6 +17,8 @@
  '(global-display-line-numbers-mode t)
  '(package-selected-packages (quote (material-theme better-defaults)))
  '(python-indent-guess-indent-offset nil)
+ '(python-shell-interpreter "python3")
+ '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(show-paren-mode t))
 
 (setq inhibit-startup-message t)
@@ -56,3 +58,9 @@
       myPackages)
 (load-theme 'material t)
 (elpy-enable)
+
+(add-hook 'python-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode nil)
+        (setq tab-width 4)
+        (setq python-indent-offset 4)))
