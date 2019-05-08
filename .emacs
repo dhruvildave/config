@@ -12,6 +12,7 @@
     ((java-mode . "java")
      (awk-mode . "awk")
      (other . "stroustrup"))))
+ '(column-number-mode t)
  '(custom-enabled-themes (quote (deeper-blue)))
  '(display-line-numbers-type (quote relative))
  '(global-display-line-numbers-mode t)
