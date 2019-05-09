@@ -16,6 +16,8 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(display-line-numbers-type (quote relative))
  '(global-display-line-numbers-mode t)
+ '(org-indent-indentation-per-level 4)
+ '(org-startup-truncated nil)
  '(package-selected-packages (quote (material-theme better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
