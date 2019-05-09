@@ -15,6 +15,7 @@
  '(column-number-mode t)
  '(custom-enabled-themes (quote (deeper-blue)))
  '(display-line-numbers-type (quote relative))
+ '(electric-pair-mode t)
  '(global-display-line-numbers-mode t)
  '(org-indent-indentation-per-level 4)
  '(org-startup-truncated nil)
@@ -59,7 +60,7 @@
     (unless (package-installed-p package)
       (package-install package)))
       myPackages)
-(load-theme 'material t)
+; (load-theme 'material t)
 (elpy-enable)
 
 (add-hook 'python-mode-hook
