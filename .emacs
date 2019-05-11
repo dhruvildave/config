@@ -23,6 +23,7 @@
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
+ '(require-final-newline (quote visit-save))
  '(show-paren-mode t))
 
 (setq inhibit-startup-message t)
