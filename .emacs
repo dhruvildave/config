@@ -19,7 +19,9 @@
  '(global-display-line-numbers-mode t)
  '(org-indent-indentation-per-level 4)
  '(org-startup-truncated nil)
- '(package-selected-packages (quote (material-theme better-defaults)))
+ '(package-selected-packages
+   (quote
+    (elpy company-irony-c-headers winring company-irony irony material-theme better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
@@ -69,3 +71,12 @@
         (setq indent-tabs-mode nil)
         (setq tab-width 4)
         (setq python-indent-offset 4)))
+
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
