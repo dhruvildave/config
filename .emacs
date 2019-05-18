@@ -13,7 +13,7 @@
      (awk-mode . "awk")
      (other . "stroustrup"))))
  '(column-number-mode t)
- '(custom-enabled-themes (quote (deeper-blue)))
+ '(custom-enabled-themes (quote (tsdh-dark)))
  '(display-line-numbers-type (quote relative))
  '(electric-pair-mode t)
  '(global-display-line-numbers-mode t)
@@ -21,7 +21,7 @@
  '(org-startup-truncated nil)
  '(package-selected-packages
    (quote
-    (elpy company-irony-c-headers winring company-irony irony material-theme better-defaults)))
+    (zenburn-theme dracula-theme one-themes constant-theme elpy company-irony-c-headers winring company-irony irony material-theme better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
@@ -57,7 +57,12 @@
 (defvar myPackages
   '(better-defaults
      elpy
-    material-theme))
+     material-theme
+     zenburn-theme
+     dracula-theme
+     monokai-theme
+     constant-theme
+     one-themes))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -72,26 +77,14 @@
         (setq tab-width 4)
         (setq python-indent-offset 4)))
 
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
+					; (load-theme 'constant t)
 
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+					; (load-theme 'constant-light 0)
 
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
+					; (load-theme 'one-dark t)
 
+					; (load-theme 'dracula t)
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+					; (load-theme 'zenburn t)
 
-(unless (require 'el-get nil 'noerror)
-  (require 'package)
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.org/packages/"))
-  (package-refresh-contents)
-  (package-initialize)
-  (package-install 'el-get)
-  (require 'el-get))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+(load-theme 'monokai t)
