@@ -77,10 +77,10 @@
 ;;   constant-theme
 ;;   one-themes))
 
-(mapc #'(lambda (package)
-	  (unless (package-installed-p package)
-	    (package-install package)))
-      myPackages)
+;; (mapc #'(lambda (package)
+;;	  (unless (package-installed-p package)
+;;	    (package-install package)))
+;;      myPackages)
 
 (elpy-enable)
 
