@@ -1,3 +1,5 @@
+;; dhruvil
+;; Sun 19 May 2019 02:37:29 PM IST
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -21,7 +23,18 @@
  '(org-startup-truncated nil)
  '(package-selected-packages
    (quote
-    (zenburn-theme dracula-theme one-themes constant-theme elpy company-irony-c-headers winring company-irony irony material-theme better-defaults)))
+    (solarized-theme
+     zenburn-theme
+     dracula-theme
+     one-themes
+     constant-theme
+     elpy
+     company-irony-c-headers
+     winring
+     company-irony
+     irony
+     material-theme
+     better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
@@ -54,21 +67,21 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar myPackages
-  '(better-defaults
-     elpy
-     material-theme
-     zenburn-theme
-     dracula-theme
-     monokai-theme
-     constant-theme
-     one-themes))
+;; (defvar myPackages
+;; '(better-defaults
+;;   elpy
+;;   material-theme
+;;   zenburn-theme
+;;   dracula-theme
+;;   monokai-theme
+;;   constant-theme
+;;   one-themes))
 
 (mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
+	  (unless (package-installed-p package)
+	    (package-install package)))
       myPackages)
-; (load-theme 'material t)
+
 (elpy-enable)
 
 (add-hook 'python-mode-hook
@@ -77,14 +90,11 @@
         (setq tab-width 4)
         (setq python-indent-offset 4)))
 
-					; (load-theme 'constant t)
-
-					; (load-theme 'constant-light 0)
-
-					; (load-theme 'one-dark t)
-
-					; (load-theme 'dracula t)
-
-					; (load-theme 'zenburn t)
-
+;; (load-theme 'constant t)
+;; (load-theme 'constant-light 0)
+;; (load-theme 'one-dark t)
+;; (load-theme 'dracula t)
+;; (load-theme 'zenburn t)
+;; (load-theme 'material t)
 (load-theme 'monokai t)
+;; (load-theme 'solarized-dark t)
