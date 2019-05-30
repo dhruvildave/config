@@ -3,3 +3,11 @@ alias data='cd /mnt/4427FDEE206BF5AE/'
 alias codes='cd /mnt/4427FDEE206BF5AE/Documents/codes'
 
 alias x='xelatex'
+
+alias dr='dotnet run'
+
+alias co='code'
+
+alias ci='code-insiders'
+
+alias ref='cd /mnt/4427FDEE206BF5AE/Documents/codes/reference-books'
