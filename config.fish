@@ -10,8 +10,14 @@ function fish_prompt
     set_color blue
     printf "%s" "$hostname"
     set_color magenta
-    printf " %s" "$PWD"
+    if test (pwd) = $HOME
+        printf " %s" $HOME
+    else
+        printf " %s" (pwd | rev | cut -f1 -d '/' | rev)
+    end
     set_color red
     printf "] "
     set_color normal
 end
+
+set fish_greeting "hello, world!"
