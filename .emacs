@@ -23,18 +23,7 @@
  '(org-startup-truncated nil)
  '(package-selected-packages
    (quote
-    (solarized-theme
-     zenburn-theme
-     dracula-theme
-     one-themes
-     constant-theme
-     elpy
-     company-irony-c-headers
-     winring
-     company-irony
-     irony
-     material-theme
-     better-defaults)))
+    (tide solarized-theme zenburn-theme dracula-theme one-themes constant-theme elpy company-irony-c-headers winring company-irony irony material-theme better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
@@ -98,3 +87,24 @@
 ;; (load-theme 'material t)
 ;; (load-theme 'monokai t)
 ;; (load-theme 'solarized-dark t)
+
+;; TypeScript Setup
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
