@@ -18,6 +18,7 @@
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(display-line-numbers-type (quote relative))
  '(electric-pair-mode t)
+ '(global-auto-revert-mode t)
  '(global-display-line-numbers-mode t)
  '(org-indent-indentation-per-level 4)
  '(org-startup-truncated nil)
