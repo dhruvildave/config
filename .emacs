@@ -16,6 +16,7 @@
      (other . "stroustrup"))))
  '(column-number-mode t)
  '(custom-enabled-themes (quote (tsdh-dark)))
+ '(delete-trailing-lines t)
  '(display-line-numbers-type (quote relative))
  '(electric-pair-mode t)
  '(global-auto-revert-mode t)
@@ -57,6 +58,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; (defvar myPackages
 ;; '(better-defaults
 ;;   elpy
