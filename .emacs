@@ -1,47 +1,3 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; File name: ` ~/.emacs '
-;;; ---------------------
-;;;
-;;; If you need your own personal ~/.emacs
-;;; please make a copy of this file
-;;; an placein your changes and/or extension.
-;;;
-;;; Copyright (c) 1997-2002 SuSE Gmbh Nuernberg, Germany.
-;;;
-;;; Author: Werner Fink, <feedback@suse.de> 1997,98,99,2002
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Test of Emacs derivates
-;;; -----------------------
-(if (string-match "XEmacs\\|Lucid" emacs-version)
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;; XEmacs
-  ;;; ------
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (progn
-     (if (file-readable-p "~/.xemacs/init.el")
-        (load "~/.xemacs/init.el" nil t))
-  )
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;; GNU-Emacs
-  ;;; ---------
-  ;;; load ~/.gnu-emacs or, if not exists /etc/skel/.gnu-emacs
-  ;;; For a description and the settings see /etc/skel/.gnu-emacs
-  ;;;   ... for your private ~/.gnu-emacs your are on your one.
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (if (file-readable-p "~/.gnu-emacs")
-      (load "~/.gnu-emacs" nil t)
-    (if (file-readable-p "/etc/skel/.gnu-emacs")
-	(load "/etc/skel/.gnu-emacs" nil t)))
-
-  ;; Custom Settings
-  ;; ===============
-  ;; To avoid any trouble with the customization system of GNU emacs
-  ;; we set the default file ~/.gnu-emacs-custom
-  (setq custom-file "~/.gnu-emacs-custom")
-  (load "~/.gnu-emacs-custom" t t)
-;;;
-)
 ;;;
 ;; dhruvil
 ;; Sun 19 May 2019 02:37:29 PM IST
@@ -61,6 +17,7 @@
      (other . "stroustrup"))))
  '(column-number-mode t)
  '(custom-enabled-themes (quote (tsdh-dark)))
+ '(delete-selection-mode nil)
  '(delete-trailing-lines t)
  '(display-line-numbers-type (quote relative))
  '(electric-pair-mode t)
@@ -70,12 +27,24 @@
  '(org-startup-truncated nil)
  '(package-selected-packages
    (quote
-    (tide solarized-theme zenburn-theme dracula-theme one-themes constant-theme elpy company-irony-c-headers winring company-irony irony material-theme better-defaults)))
+    (tide elpy company-irony-c-headers winring company-irony irony better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(require-final-newline (quote visit-save))
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(verilog-auto-lineup (quote all))
+ '(verilog-case-indent 4)
+ '(verilog-cexp-indent 4)
+ '(verilog-compiler "/usr/bin/iverilog")
+ '(verilog-indent-level 4)
+ '(verilog-indent-level-behavioral 4)
+ '(verilog-indent-level-declaration 4)
+ '(verilog-indent-level-module 4))
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
 
 (setq inhibit-startup-message t)
 
@@ -102,17 +71,15 @@
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
-
+(add-hook 'c-mode-common-hook '(lambda () (c-toggle-auto-state 1)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(defvar myPackages
-'(tide solarized-theme zenburn-theme dracula-theme one-themes constant-theme elpy company-irony-c-headers winring company-irony irony material-theme better-defaults))
 
-(mapc #'(lambda (package)
-  (unless (package-installed-p package)
-    (package-install package)))
-     myPackages)
+;(mapc #'(lambda (package)
+;  (unless (package-installed-p package)
+;    (package-install package)))
+;     myPackages)
 
-(elpy-enable)
+;; (elpy-enable)
 
 (add-hook 'python-mode-hook
       (lambda ()
@@ -123,7 +90,7 @@
 ;; (load-theme 'constant t)
 ;; (load-theme 'constant-light 0)
 ;; (load-theme 'one-dark t)
-(load-theme 'dracula t)
+;; (load-theme 'dracula t)
 ;; (load-theme 'zenburn t)
 ;; (load-theme 'material t)
 ;; (load-theme 'monokai t)
