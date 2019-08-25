@@ -31,6 +31,7 @@ sudo apt install emacs \
                  tree \
                  clang-format \
                  clang-tidy \
+                 tmux \
                  gdb \
                  lldb \
                  llvm \
