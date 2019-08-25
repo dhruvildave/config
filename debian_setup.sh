@@ -22,6 +22,7 @@ sudo apt upgrade -y
 sudo apt remove libreoffice* -y
 sudo apt install emacs \
                  git \
+                 bc \
                  clang \
                  g++ \
                  valgrind \
