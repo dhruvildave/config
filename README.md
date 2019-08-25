@@ -1,2 +1,2 @@
 # config
-vim and emacs config files
+Config files
