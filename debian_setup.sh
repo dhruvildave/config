@@ -54,7 +54,8 @@ sudo apt install emacs \
                  lighttpd \
                  flatpak \
                  gnome-software-plugin-flatpak \
-                 fonts-ibm-plex
+                 fonts-ibm-plex \
+                 firmware-realtek
 
 if [ -x "$(command -v curl)" ]; then
     # Miniconda setup
@@ -83,7 +84,8 @@ if [ -x "$(command -v flatpak)" ]; then
                     inkscape \
                     kdenlive \
                     libreoffice \
-                    octave
+                    octave \
+                    qbittorrent
 else
     echo "flatpak not installed"
     echo "Spotify install failed"
@@ -99,3 +101,4 @@ if [ $? -eq 0 ]; then
 else
     echo "There are certain installation errors detected in your system"
 fi
+
