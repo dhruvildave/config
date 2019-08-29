@@ -40,6 +40,7 @@ sudo apt install emacs \
                  r-base \
                  python3-dev \
                  texlive \
+                 texlive-latex-extra \
                  vim \
                  ess \
                  numix-gtk-theme \
@@ -52,7 +53,8 @@ sudo apt install emacs \
                  postgresql \
                  lighttpd \
                  flatpak \
-                 gnome-software-plugin-flatpak
+                 gnome-software-plugin-flatpak \
+                 fonts-ibm-plex
 
 if [ -x "$(command -v curl)" ]; then
     # Miniconda setup
