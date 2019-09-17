@@ -13,6 +13,9 @@ echo "set -o vi" >> ~/.bashrc
 # Setting recursive globbing in bash
 echo "shopt -s globstar" >> ~/.bashrc
 
+# Setting up directory check path
+echo "shopt -s cdspell" >> ~/.bashrc
+
 # Setting up certain useful aliases
 echo "alias R=\"R --no-save\"" >> ~/.bash_aliases
 echo "alias py3=\"python3\"" >> ~/.bash_aliases
