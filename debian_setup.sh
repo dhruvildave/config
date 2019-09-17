@@ -85,15 +85,13 @@ if [ -x "$(command -v flatpak)" ]; then
                     kdenlive \
                     libreoffice \
                     octave \
-                    qbittorrent
+                    qbittorrent \
+                    discord \
+                    transmission \
+                    audacity \
+                    vlc
 else
-    echo "flatpak not installed"
-    echo "Spotify install failed"
-    echo "GIMP install failed"
-    echo "Inkscape install failed"
-    echo "Kdenlive install failed"
-    echo "Libreoffice install failed"
-    echo "GNU Octave install failed"
+    echo "Various install failed"
 fi
 
 if [ $? -eq 0 ]; then
@@ -101,4 +99,3 @@ if [ $? -eq 0 ]; then
 else
     echo "There are certain installation errors detected in your system"
 fi
-
