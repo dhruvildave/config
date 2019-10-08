@@ -131,10 +131,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-set -o vi
+set editing-mode emacs
 shopt -s globstar
 shopt -s cdspell
-set show-all-if-ambiguous-on
+set show-all-if-ambiguous on
 set TAB:menu-complete
 set completion-ignore-case on
 
