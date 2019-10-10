@@ -135,8 +135,9 @@ set editing-mode emacs
 shopt -s globstar
 shopt -s cdspell
 set show-all-if-ambiguous on
-set TAB:menu-complete
-set completion-ignore-case on
+bind "set completion-ignore-case on"
+bind "set show-all-if-ambiguous on"
+bind "TAB: menu-complete"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
