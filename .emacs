@@ -10,6 +10,7 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(blink-cursor-mode nil)
  '(c-default-style
    (quote
     ((java-mode . "java")
@@ -23,7 +24,10 @@
  '(electric-pair-mode t)
  '(global-auto-revert-mode t)
  '(global-display-line-numbers-mode t)
+ '(org-ascii-indented-line-width 4)
+ '(org-edit-src-content-indentation 4)
  '(org-indent-indentation-per-level 4)
+ '(org-src-preserve-indentation t)
  '(org-startup-truncated nil)
  '(package-selected-packages
    (quote
