@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Sun Aug 25 11:26:18 IST 2019
 # Works in Debian GNU/Linux 10 (buster)
 
@@ -14,6 +15,8 @@ echo "set show-all-if-ambiguous on" >> ~/.bashrc
 echo "bind \"set completion-ignore-case on\"" >> ~/.bashrc
 echo "bind \"set show-all-if-ambiguous on\"" >> ~/.bashrc
 echo "bind \"TAB: menu-complete\"" >> ~/.bashrc
+echo "shopt -s histappend" >> ~/.bashrc
+echo "shopt -s checkwinsize" >> ~/.bashrc
 
 # Setting up certain useful aliases
 echo "alias R=\"R --no-save\"" >> ~/.bash_aliases
