@@ -7,14 +7,13 @@
 # chmod 0755 debian_setup.sh
 # ./debian_setup.sh
 
-# Setting bash vi mode
-echo "set -o vi" >> ~/.bashrc
-
-# Setting recursive globbing in bash
+echo "set editing-mode emacs" >> ~/.bashrc
 echo "shopt -s globstar" >> ~/.bashrc
-
-# Setting up directory check path
 echo "shopt -s cdspell" >> ~/.bashrc
+echo "set show-all-if-ambiguous on" >> ~/.bashrc
+echo "bind \"set completion-ignore-case on\"" >> ~/.bashrc
+echo "bind \"set show-all-if-ambiguous on\"" >> ~/.bashrc
+echo "bind \"TAB: menu-complete\"" >> ~/.bashrc
 
 # Setting up certain useful aliases
 echo "alias R=\"R --no-save\"" >> ~/.bash_aliases
