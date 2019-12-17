@@ -6,14 +6,14 @@
     "files.trimTrailingWhitespace": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
-    "julia.enableTelemetry": true,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "workbench.editor.closeOnFileDelete": true,
     "explorer.confirmDragAndDrop": false,
     "python.jediEnabled": false,
-    "terminal.integrated.inheritEnv": false,
     "zenMode.hideLineNumbers": false,
     "editor.largeFileOptimizations": true,
-    "C_Cpp.updateChannel": "Insiders"
+    "C_Cpp.updateChannel": "Insiders",
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false
 }
