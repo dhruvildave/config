@@ -1,7 +1,7 @@
 #!/bin/env bash
 # Cross-platform linux update script
 
-dist="$(grep "NAME" /etc/os-release | awk 'NR==1' | cut -d= -f2)"  # Find the name of distro
+dist="$(grep -m 1 "NAME" /etc/os-release | cut -d= -f2)"  # Find the name of distro
 
 # Base package manager
 if [ "$dist" == "Fedora" ] || [ "$dist" == "CentOS" ]; then
