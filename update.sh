@@ -1,7 +1,7 @@
 #!/bin/env bash
 # Cross-platform linux update script
 
-dist="$(grep -w "ID" /etc/os-release | cut -d= -f2)"  # Find the name of distro
+readonly dist="$(grep -w "ID" /etc/os-release | cut -d= -f2)"  # Find the name of distro
 
 # Base package manager
 if [ "$dist" == "fedora" ] || [ "$dist" == "centos" ]; then
@@ -32,6 +32,7 @@ if [ -x "$(command -v conda)" ]; then
             conda update --all -y -n "$name"
         done
     fi
+    unset name
 fi
 
 # Flatpak
