@@ -28,7 +28,7 @@ if [ -x "$(command -v conda)" ]; then
                 continue  # Do not update torch
             fi
 
-	        echo -e "Updating \\033[01;33m$name\\033[00m"
+            echo -e "\\nUpdating \\033[01;33m$name\\033[00m"
             conda update --all -y -n "$name"
         done
     fi
