@@ -58,6 +58,7 @@ if [ -x "$(command -v node | grep -w nvm)" ]; then
     if [ "$(node --version)" != "$ver" ]; then
         nvm uninstall "$ver"
     fi
+    nvm use node
     unset ver
 fi
 
