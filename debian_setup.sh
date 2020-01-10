@@ -63,6 +63,8 @@ sudo apt install emacs \
                  firmware-realtek
 
 if [ -x "$(command -v curl)" ]; then
+    cd ~
+
     # Miniconda setup
     curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
     chmod 0755 Miniconda3-latest-Linux-x86_64.sh
@@ -75,6 +77,9 @@ if [ -x "$(command -v curl)" ]; then
     sudo apt install apt-transport-https
     sudo apt update
     sudo apt install code
+    
+    curl -O https://raw.githubusercontent.com/dhruvildave/config/master/update.sh
+    chmod 0755 update.sh
 else
     echo "cURL not installed"
     echo "Miniconda install failed"
