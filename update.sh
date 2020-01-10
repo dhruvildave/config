@@ -57,8 +57,8 @@ if [ -x "$(command -v node | grep -w nvm)" ]; then
     nvm install node --reinstall-packages-from=node
     if [ "$(node --version)" != "$ver" ]; then
         nvm uninstall "$ver"
+        nvm use node
     fi
-    nvm use node
     unset ver
 fi
 
