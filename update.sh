@@ -51,7 +51,7 @@ fi
 # Flatpak
 yellow "flatpak"
 if [ -x "$(command -v flatpak)" ]; then
-    flatpak update -y
+    sudo flatpak update -y
 fi
 
 # NodeJS
