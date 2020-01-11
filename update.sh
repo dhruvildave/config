@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 # Cross-platform linux update script
 # Mon Dec 30 23:14:13 IST 2019
 # Author: https://github.com/dhruvildave
@@ -21,6 +21,11 @@ elif [ "$dist" == "debian" ] ||
         sudo apt update
         sudo apt full-upgrade -y
         sudo apt autoremove -y
+    fi
+elif [ "$dist" == "\"opensuse-tumbleweed\"" ]; then
+    if [ -x "$(command -v zypper)" ]; then
+        yellow "zypper"
+        sudo zypper dup -y
     fi
 fi
 
