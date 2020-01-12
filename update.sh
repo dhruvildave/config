@@ -27,6 +27,7 @@ elif [ "$dist" == "\"opensuse-tumbleweed\"" ]; then
     if [ -x "$proc" ]; then
         sudo kill "$proc"
     fi
+    unset proc
 
     if [ -x "$(command -v zypper)" ]; then
         yellow "zypper"
