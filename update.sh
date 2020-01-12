@@ -23,6 +23,11 @@ elif [ "$dist" == "debian" ] ||
         sudo apt autoremove -y
     fi
 elif [ "$dist" == "\"opensuse-tumbleweed\"" ]; then
+    proc="$(pgrep -u root packagekitd)"
+    if [ -x "$proc" ]; then
+        sudo kill "$proc"
+    fi
+
     if [ -x "$(command -v zypper)" ]; then
         yellow "zypper"
         sudo zypper dup -y
