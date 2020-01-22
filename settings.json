@@ -15,5 +15,10 @@
     "editor.largeFileOptimizations": true,
     "C_Cpp.updateChannel": "Insiders",
     "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false
+    "telemetry.enableCrashReporter": false,
+    "julia.enableTelemetry": true,
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+    "C_Cpp.clang_format_sortIncludes": true,
+    "workbench.colorTheme": "Material Night Eighties",
+    "debug.inlineValues": true
 }
