@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+
+git checkout gh-pages
+git merge --no-ff --no-commit master
+git reset HEAD .gitignore
+git checkout -- .gitignore
+yarn add typescript
+yarn run build
+git add .
+git commit -m "$(date)"
