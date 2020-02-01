@@ -10,3 +10,14 @@ StartupNotify=true
 Categories=Network;WebBrowser;
 Keywords=web;browser;internet;
 Actions=new-window;new-private-window;
+
+[Desktop Action new-window]
+Name=Open a New Window
+Exec=/opt/firefox-developer/firefox/firefox --new-window %u
+
+[Desktop Action new-private-window]
+Name=Open a New Private Window
+Exec=/opt/firefox-developer/firefox/firefox --private-window %u
+
+# Extract Firefox Developer edition in /opt/firefox-developer
+# Move this file to ~/.local/share/applications/firefox-developer.desktop
