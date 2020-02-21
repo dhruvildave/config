@@ -8,7 +8,7 @@ readonly dist="$(grep -w "ID" /etc/os-release | cut -d= -f2)"  # Find the name o
 yellow() { echo -e "\\nUpdating \\033[01;33m$1\\033[00m"; }  # Prints the argument in yellow color
 
 # Base package manager
-if [ "$dist" == "fedora" ] || [ "$dist" == "centos" ]; then
+if [ "$dist" == "fedora" ] || [ "$dist" == \"centos\" ]; then
     if [ -x "$(command -v dnf)" ]; then
         yellow "dnf"
         sudo dnf upgrade -y
@@ -65,11 +65,16 @@ if [ -x "$(command -v node | grep -w nvm)" ]; then
     yellow "NodeJS"
     ver="$(node --version)"
     . "$NVM_DIR/nvm.sh"
-    nvm install node --reinstall-packages-from=node
+    nvm install --lts
     if [ "$(node --version)" != "$ver" ]; then
+        npm i -g yarn
         nvm uninstall "$ver"
-        nvm use node
+        nvm use --lts
+        . ~/.bashrc
     fi
+    # if [ -x "$(command -v yarn | grep -w nvm)" ]; then
+        # yarn global upgrade --latest
+    # fi
     unset ver
 fi
 
