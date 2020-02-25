@@ -32,11 +32,12 @@
  '(org-startup-truncated nil)
  '(package-selected-packages
    (quote
-    (tide elpy company-irony-c-headers winring company-irony irony better-defaults)))
+    (ample-theme ac-octave evil tide elpy company-irony-c-headers winring company-irony irony better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(require-final-newline (quote visit-save))
+ '(set-default-font "IBM Plex Mono-16")
  '(show-paren-mode t)
  '(verilog-auto-delete-trailing-whitespace t)
  '(verilog-auto-indent-on-newline t)
@@ -123,3 +124,10 @@
 ;(add-hook 'before-save-hook 'tide-format-before-save)
 
 ;(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+
+;; Enable Evil
+(require 'evil)
+(evil-mode 1)
