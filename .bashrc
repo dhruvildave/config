@@ -148,3 +148,10 @@ export PATH="$(yarn global bin):$PATH"
 
 # Flutter
 export PATH="/home/dhruvil/flutter/bin/:$PATH"
+
+# $HOME
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
