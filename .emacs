@@ -39,6 +39,7 @@
  '(require-final-newline (quote visit-save))
  '(set-default-font "IBM Plex Mono-16")
  '(show-paren-mode t)
+ '(tool-bar-mode nil)
  '(verilog-auto-delete-trailing-whitespace t)
  '(verilog-auto-indent-on-newline t)
  '(verilog-auto-lineup (quote ignore))
@@ -124,10 +125,3 @@
 ;(add-hook 'before-save-hook 'tide-format-before-save)
 
 ;(add-hook 'typescript-mode-hook #'setup-tide-mode)
-
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
-
-;; Enable Evil
-(require 'evil)
-(evil-mode 1)
