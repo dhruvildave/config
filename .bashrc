@@ -15,14 +15,15 @@ export PATH
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-# User specific aliases and functions
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
-# Prompt
-export PS1="[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ "
+# User specific aliases and functions
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=erasedups:ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -39,9 +40,8 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 set editing-mode emacs
 shopt -s cdspell
@@ -49,6 +49,9 @@ set show-all-if-ambiguous on
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 bind "TAB: menu-complete"
+
+# Prompt
+export PS1="[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ "
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -65,11 +68,13 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Private keys
-if [ -f ~/.app_creds ]; then
-    . ~/.app_creds
+# CUDA Toolkit
+if ! [[ "$PATH" =~ "/usr/local/cuda/bin/:" ]]; then
+    export PATH="/usr/local/cuda/bin/:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
 fi
 
+# NodeJS
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -77,9 +82,4 @@ export NVM_DIR="$HOME/.nvm"
 # Yarn
 if ! [[ "$PATH" =~ "$(yarn global bin):" ]]; then
     export PATH="$(yarn global bin):$PATH"
-fi
-
-# Flutter
-if ! [[ "$PATH" =~ "$HOME/flutter/bin:" ]]; then
-    export PATH="/home/dhruvil/flutter/bin/:$PATH"
 fi
