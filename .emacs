@@ -32,11 +32,12 @@
  '(org-startup-truncated nil)
  '(package-selected-packages
    (quote
-    (ample-theme ac-octave evil tide elpy company-irony-c-headers winring company-irony irony better-defaults)))
+    (ess ample-theme ac-octave evil tide elpy company-irony-c-headers winring company-irony irony better-defaults)))
  '(python-indent-guess-indent-offset nil)
  '(python-shell-interpreter "python3")
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(require-final-newline (quote visit-save))
+ '(ring-bell-function (quote ignore))
  '(set-default-font "IBM Plex Mono-16")
  '(show-paren-mode t)
  '(tool-bar-mode nil)

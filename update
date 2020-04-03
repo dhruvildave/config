@@ -41,7 +41,6 @@ yellow() { echo -e "\\nUpdating \\033[01;33m$1\\033[00m"; }  # Prints the argume
         for i in "$HOME/miniconda3/envs"/*; do
             [[ -e "$i" ]] || break  # No user defined envs
             name="$(echo "$i" | rev | cut -d/ -f1 | rev)"
-            [[ "$name" == torch ]] && continue  # Do not update torch
 
             yellow "conda->$name"
             conda update --all -y -n "$name"
