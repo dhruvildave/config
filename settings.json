@@ -13,9 +13,7 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-    "julia.enableCrashReporter": true,
-    "julia.enableTelemetry": true,
-    "python.insidersChannel": "daily",
+    "python.insidersChannel": "off",
     "python.jediEnabled": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
@@ -24,5 +22,7 @@
     "window.zoomLevel": 2,
     "workbench.colorTheme": "Material Night Eighties",
     "workbench.editor.closeOnFileDelete": true,
-    "zenMode.hideLineNumbers": false
+    "zenMode.hideLineNumbers": false,
+    "html.format.wrapLineLength": 80,
+    "editor.renameOnType": true
 }
