@@ -24,5 +24,13 @@
     "workbench.editor.closeOnFileDelete": true,
     "zenMode.hideLineNumbers": false,
     "html.format.wrapLineLength": 80,
-    "editor.renameOnType": true
+    "editor.renameOnType": true,
+    "editor.autoIndent": "advanced",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    },
+    "[html, css, javascript, typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
