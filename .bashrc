@@ -15,6 +15,7 @@ export PATH
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
+# User specific aliases and functions
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -53,6 +54,12 @@ bind "TAB: menu-complete"
 # Prompt
 export PS1="[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ "
 
+# CUDA Toolkit
+if ! [[ "$PATH" =~ "/usr/local/cuda/bin/:" ]]; then
+    export PATH="/usr/local/cuda/bin/:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
+fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -68,13 +75,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# CUDA Toolkit
-if ! [[ "$PATH" =~ "/usr/local/cuda/bin/:" ]]; then
-    export PATH="/usr/local/cuda/bin/:$PATH"
-    export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
-fi
 
-# NodeJS
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -82,4 +83,10 @@ export NVM_DIR="$HOME/.nvm"
 # Yarn
 if ! [[ "$PATH" =~ "$(yarn global bin):" ]]; then
     export PATH="$(yarn global bin):$PATH"
+fi
+
+# Deno
+if [[ -z "$DENO_INSTALL" ]]; then
+    export DENO_INSTALL="~/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
 fi
