@@ -87,6 +87,6 @@ fi
 
 # Deno
 if [[ -z "$DENO_INSTALL" ]]; then
-    export DENO_INSTALL="~/.deno"
+    export DENO_INSTALL="/home/dhruvil/.deno"
     export PATH="$DENO_INSTALL/bin:$PATH"
 fi
