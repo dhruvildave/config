@@ -1,55 +1,62 @@
 {
-    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
-    "C_Cpp.clang_format_sortIncludes": true,
-    "C_Cpp.updateChannel": "Insiders",
-    "debug.inlineValues": true,
-    "editor.fontFamily": "'IBM Plex Mono'",
-    "editor.fontSize": 18,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.largeFileOptimizations": true,
-    "editor.suggestSelection": "first",
-    "explorer.confirmDragAndDrop": false,
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "python.insidersChannel": "off",
-    "python.jediEnabled": false,
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "window.restoreFullscreen": true,
-    "window.zoomLevel": 2,
-    "workbench.colorTheme": "Material Night Eighties",
-    "workbench.editor.closeOnFileDelete": true,
-    "zenMode.hideLineNumbers": false,
-    "html.format.wrapLineLength": 80,
-    "editor.renameOnType": true,
-    "editor.autoIndent": "advanced",
-    "editor.codeActionsOnSave": {
-        "source.fixAll": true,
-        "source.organizeImports": true
-    },
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "java.semanticHighlighting.enabled": true
+  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+  "C_Cpp.clang_format_sortIncludes": true,
+  "C_Cpp.updateChannel": "Insiders",
+  "debug.inlineValues": true,
+  "editor.fontFamily": "'IBM Plex Mono'",
+  "editor.fontSize": 18,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.largeFileOptimizations": true,
+  "editor.suggestSelection": "first",
+  "explorer.confirmDragAndDrop": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "python.insidersChannel": "off",
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "window.restoreFullscreen": true,
+  "window.zoomLevel": 2,
+  "workbench.colorTheme": "GitHub Dark",
+  "workbench.editor.closeOnFileDelete": true,
+  "zenMode.hideLineNumbers": false,
+  "html.format.wrapLineLength": 80,
+  "editor.renameOnType": true,
+  "editor.autoIndent": "advanced",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "java.semanticHighlighting.enabled": true,
+  "window.menuBarVisibility": "toggle",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "go.useLanguageServer": true,
+  "julia.enableTelemetry": true,
+  "python.languageServer": "Microsoft",
+  "python.showStartPage": false
 }
