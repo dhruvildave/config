@@ -57,6 +57,6 @@
   },
   "go.useLanguageServer": true,
   "julia.enableTelemetry": true,
-  "python.languageServer": "Microsoft",
+  "python.languageServer": "Pylance",
   "python.showStartPage": false
 }
