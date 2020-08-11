@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Cross-platform linux update script
 # Mon Dec 30 23:14:13 IST 2019
 # Author: https://github.com/dhruvildave
