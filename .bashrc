@@ -73,43 +73,15 @@ shopt -s globstar
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-set editing-mode emacs
+bind "set editing-mode emacs"
 shopt -s cdspell
-set show-all-if-ambiguous on
+bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 bind "TAB: menu-complete"
 
 # Prompt
 export PS1="[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ "
-
-# CUDA Toolkit
-if ! [[ "$PATH" =~ "/usr/local/cuda/bin/:" ]]; then
-    export PATH="/usr/local/cuda/bin/:$PATH"
-    export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
-fi
-
-# Deno
-if [[ -z "$DENO_INSTALL" ]]; then
-    export DENO_INSTALL="/home/dhruvil/.deno"
-    export PATH="$DENO_INSTALL/bin:$PATH"
-fi
-eval "$(deno completions bash)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Yarn
-if ! [[ "$PATH" =~ "$(yarn global bin):" ]]; then
-    export PATH="$(yarn global bin):$PATH"
-fi
-
-# Containers
-[[ -f "$HOME/containers/.docker_aliases.sh" ]] && . $HOME/containers/.docker_aliases.sh
-
-# GitHub CLI
-eval "$(gh completion -s bash)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -126,10 +98,27 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    exec tmux
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Yarn
+if ! [[ "$PATH" =~ "$(yarn global bin):" ]]; then
+    export PATH="$(yarn global bin):$PATH"
 fi
+
+# Deno
+if [[ -f "/home/dhruvil/.deno/bin/deno" ]]; then
+    export DENO_INSTALL="/home/dhruvil/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+eval "$(deno completions bash)"
+
+# GitHub CLI
+eval "$(gh completion -s bash)"
+
+# Containers
+[[ -f "$HOME/containers/.docker_aliases.sh" ]] && . $HOME/containers/.docker_aliases.sh
 
 # Remove duplicate PATH entries
 export PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
