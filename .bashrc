@@ -25,6 +25,12 @@
 #export PILOTPORT=/dev/pilot
 #export PILOTRATE=115200
 
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 test -s ~/.alias && . ~/.alias || true
 
 # .bashrc
@@ -119,6 +125,11 @@ eval "$(gh completion -s bash)"
 
 # Containers
 [[ -f "$HOME/containers/.docker_aliases.sh" ]] && . $HOME/containers/.docker_aliases.sh
+
+# tmux
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 
 # Remove duplicate PATH entries
 export PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
