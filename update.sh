@@ -22,8 +22,9 @@ case "$dist" in
 
 "debian" | "pop" | "kali")
     yellow "apt" &&
-        sudo zypper ref &&
-        sudo zypper dup -y
+        sudo apt update &&
+        sudo apt full-upgrade -y &&
+        sudo apt autoremove -y
     ;;
 
 "\"opensuse-tumbleweed\"" | "\"opensuse-leap\"")
