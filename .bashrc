@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Sample .bashrc for SuSE Linux
 # Copyright (c) SuSE GmbH Nuernberg
 
@@ -27,8 +29,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 test -s ~/.alias && . ~/.alias || true
@@ -41,8 +43,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
+if ! [[ "$PATH" =~ $HOME/.local/bin:$HOME/bin: ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
@@ -87,11 +88,15 @@ bind "set show-all-if-ambiguous on"
 bind "TAB: menu-complete"
 
 # Prompt
-export PS1="[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ "
+# export PS1="[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ "
+PS1="\033[01;32m┌──(\033[00m\]\033[01;33m\]\u@\h\033[00m\]\033[01;32m)-"
+PS1+="[\033[00m\]\033[01;34m\w\033[00m\]\033[01;32m] \033[01;32m(\033[00m\]\033[01;37m\$?\033[00m\]\033[01;32m)\n"
+PS1+="└─\033[00m\]\033[01;34m\]$\033[00m\] "
+export PS1
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -105,13 +110,14 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Yarn
-if ! [[ "$PATH" =~ "$(yarn global bin):" ]]; then
-    export PATH="$(yarn global bin):$PATH"
+if ! [[ "$PATH" =~ $(yarn global bin): ]]; then
+    PATH="$(yarn global bin):$PATH"
 fi
+export PATH
 
 # Deno
 if [[ -f "/home/dhruvil/.deno/bin/deno" ]]; then
@@ -124,12 +130,36 @@ eval "$(deno completions bash)"
 eval "$(gh completion -s bash)"
 
 # Containers
-[[ -f "$HOME/containers/.docker_aliases.sh" ]] && . $HOME/containers/.docker_aliases.sh
+# [[ -f "$HOME/containers/.docker_aliases.sh" ]] && . $HOME/containers/.docker_aliases.sh
 
 # tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
     exec tmux
 fi
 
+# Archive Extraction
+# usage: ex <file>
+ex() {
+    if [ -f "$1" ]; then
+        case "$1" in
+        *.tar.bz2) tar xjf "$1" ;;
+        *.tar.gz) tar xzf "$1" ;;
+        *.bz2) bunzip2 "$1" ;;
+        *.rar) unrar x "$1" ;;
+        *.gz) gunzip "$1" ;;
+        *.tar) tar xf "$1" ;;
+        *.tbz2) tar xzf "$1" ;;
+        *.zip) unzip "$1" ;;
+        *.Z) uncompress "$1" ;;
+        *.7z) 7z x "$1" ;;
+        *.tar.xz) tar xf "$1" ;;
+        *.tar.zst) unzstd "$1" ;;
+        esac
+    else
+        echo "$1 could not extracted by ex"
+    fi
+}
+
 # Remove duplicate PATH entries
-export PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
+PATH="$(python3 -c 'import os; print(":".join(set(os.environ["PATH"].split(":"))))')"
+export PATH
