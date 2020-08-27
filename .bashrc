@@ -43,8 +43,8 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific environment
-if ! [[ "$PATH" =~ $HOME/.local/bin:$HOME/bin: ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+if ! [[ "$PATH" =~ $HOME/.local/bin:$HOME/bin:/usr/sbin: ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH:/usr/sbin"
 fi
 export PATH
 
@@ -57,6 +57,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # User specific aliases and functions
+alias grep="grep --color -E"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -78,7 +79,7 @@ shopt -s checkwinsize
 shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 bind "set editing-mode emacs"
 shopt -s cdspell
@@ -88,11 +89,11 @@ bind "set show-all-if-ambiguous on"
 bind "TAB: menu-complete"
 
 # Prompt
-PS1="\033[01;32m┌──(\033[00m\]\033[01;33m\]\u@\h\033[00m\]\033[01;32m)-"
-PS1+="[\033[00m\]\033[01;34m\w\033[00m\]\033[01;32m] \033[01;32m(\033[00m\]\033[01;37m\$?\033[00m\]\033[01;32m)\033[00m\]\n"
-PS1+="\033[01;32m└─\033[00m\]\033[01;34m\]$\033[00m\] "
-export PS1
-# export PS1="[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ "
+# PS1="\033[01;32m┌──(\033[00m\]\033[01;33m\]\u@\h\033[00m\]\033[01;32m)-"
+# PS1+="[\033[00m\]\033[01;34m\w\033[00m\]\033[01;32m] \033[01;32m(\033[00m\]\033[01;37m\$?\033[00m\]\033[01;32m)\033[00m\]\n"
+# PS1+="\033[01;32m└─\033[00m\]\033[01;34m\]$\033[00m\] "
+# export PS1
+export PS1="\033[01;35m[\033[00m\[\033[01;35m\]\u@\h\[\033[00m\] \[\033[01;36m\]\W\[\033[00m\]\033[01;35m]\033[00m$ "
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -163,3 +164,17 @@ ex() {
 # Remove duplicate PATH entries
 PATH="$(python3 -c 'import os; print(":".join(set(os.environ["PATH"].split(":"))))')"
 export PATH
+
+[ -f "$HOME/.kube/config" ] && KUBECONFIG="$HOME/.kube/config" && export KUBECONFIG
+
+man() {
+    LESS_TERMCAP_mb=$'\e[1;37m' \
+        LESS_TERMCAP_md=$'\e[1;34m' \
+        LESS_TERMCAP_so=$'\e[01;36m' \
+        LESS_TERMCAP_us=$'\e[01;35m' \
+        LESS_TERMCAP_me=$'\e[0m' \
+        LESS_TERMCAP_se=$'\e[0m' \
+        LESS_TERMCAP_ue=$'\e[0m' \
+        GROFF_NO_SGR=1 \
+        command man "$@"
+}
