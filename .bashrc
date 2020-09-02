@@ -83,6 +83,7 @@ shopt -s globstar
 
 bind "set editing-mode emacs"
 shopt -s cdspell
+shopt -s autocd
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
