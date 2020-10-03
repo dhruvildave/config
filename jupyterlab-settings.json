@@ -1,0 +1,14 @@
+{
+    "markdownCellConfig": {
+        "autoClosingBrackets": true,
+        "fontFamily": "IBM Plex Mono",
+        "fontSize": 16,
+        "matchBrackets": true,
+        "lineNumbers": true
+    },
+    "codeCellConfig": {
+        "fontFamily": "IBM Plex Mono",
+        "fontSize": 16,
+        "lineNumbers": true
+    }
+}
