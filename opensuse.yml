@@ -1,0 +1,75 @@
+# Run: ansible-playbook -v -K opensuse.yml
+---
+- hosts: localhost
+  tasks:
+    - name: Install Packages with recommends
+      become: true
+      become_user: root
+      zypper:
+        update_cache: true
+        name:
+          - htop
+          - vim
+          - emacs
+          - neovim
+          - minikube
+          - docker
+          - kubernetes-client
+          - gcc
+          - gcc-c++
+          - gcc-fortran
+          - go1.15
+          - R-base
+          - tmux
+          - clang
+          - make
+          - meson
+          - ninja
+          - cmake
+          - gdb
+          - lldb
+          - gnome-boxes
+          - helm
+          - java-11-openjdk-devel
+          - man-pages
+          - neofetch
+          - patch
+          - protobuf-devel
+          - protobuf-c
+          - ranger
+          - graphviz
+          - valgrind
+          - wireshark
+          - sqlite3
+          - sqlite3-devel
+          - sqlite3-doc
+          - libOpenCL1
+          - fish
+          - kitty
+          - kompose
+          - rstudio-desktop
+          - python39
+          - python39-devel
+          - python39-idle
+          - python39-doc
+        state: present
+        disable_recommends: false
+
+    - name: Install packages without recommends
+      become: true
+      become_user: root
+      zypper:
+        update_cache: true
+        name:
+          - texlive-xetex
+          - xournalpp
+        state: present
+
+    - name: Add flathub
+      become: true
+      become_user: root
+      flatpak_remote:
+        name: flathub
+        method: system
+        state: present
+        flatpakrepo_url: "https://flathub.org/repo/flathub.flatpakrepo"
