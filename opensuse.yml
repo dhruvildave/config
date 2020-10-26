@@ -2,36 +2,60 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Install Packages with recommends
+    - name: Install misc utilities
       become: true
       become_user: root
       zypper:
         update_cache: true
         name:
+          - tmux
           - htop
-          - vim
-          - emacs
-          - neovim
-          - minikube
-          - docker
-          - kubernetes-client
+          - meson
+          - ninja
+          - cmake
+        state: present
+        disable_recommends: false
+    - name: Install build tools
+      become: true
+      become_user: root
+      zypper:
+        update_cache: true
+        name:
           - gcc
+          - make
           - gcc-c++
           - gcc-fortran
           - go1.15
           - R-base
-          - tmux
           - clang
-          - make
-          - meson
-          - ninja
-          - cmake
           - gdb
           - lldb
+          - man-pages
+        state: present
+        disable_recommends: false
+    - name: Install docker and k8s
+      become: true
+      become_user: root
+      zypper:
+        update_cache: true
+        name:
+          - kubernetes-client
+          - minikube
+          - docker
+        state: present
+        disable_recommends: false
+    - name: Install editors and other stuffs
+      become: true
+      become_user: root
+      zypper:
+        update_cache: true
+        name:
+          - vim
+          - emacs
+          - neovim
           - gnome-boxes
           - helm
           - java-11-openjdk-devel
-          - man-pages
           - neofetch
           - patch
           - protobuf-devel
@@ -42,6 +66,14 @@
           - wireshark
           - sqlite3
           - sqlite3-devel
+        state: present
+        disable_recommends: false
+    - name: Install Packages with recommends
+      become: true
+      become_user: root
+      zypper:
+        update_cache: true
+        name:
           - sqlite3-doc
           - libOpenCL1
           - fish
