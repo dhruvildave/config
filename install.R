@@ -11,6 +11,9 @@ install.packages(
     "roxygen2",
     "usethis",
     "pkgdown",
-    "data.table"
+    "data.table",
+    "devtools",
+    "remotes",
+    "ymlthis"
   )
 )
