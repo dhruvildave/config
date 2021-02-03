@@ -1,0 +1,76 @@
+---
+- hosts: localhost
+  tasks:
+    - name: install packages
+      become: true
+      become_user: root
+      update_cache: true
+      dnf:
+        state: present
+        name:
+          - ansible
+          - bat
+          - blender
+          - clang
+          - clang-tools-extra
+          - cmake
+          - doxygen
+          - emacs
+          # - ffmpeg
+          - fish
+          - gcc
+          - gcc-c++
+          - gcc-gfortran
+          - gdb
+          - git
+          - glibc-static
+          - golang
+          - google-noto-sans-devanagari-fonts
+          - graphviz
+          - gtk4
+          - gtk4-devel
+          - ibm-plex-fonts-all
+          - java-11-openjdk-devel
+          - kubernetes
+          - litecli
+          - lldb
+          - make
+          - meson
+          - neofetch
+          - neovim
+          # - obs-studio
+          - p7zip
+          - pandoc
+          - pgcli
+          - qemu
+          - radare2
+          - rstudio-desktop
+          - sqlite
+          - texlive-xetex
+          - tmux
+          - valgrind
+          - vim
+          - xournalpp
+          - zsh
+          - zstd
+
+    - name: Upgrade all packages
+      become: true
+      become_user: root
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Autoremove packages
+      become: true
+      become_user: root
+      dnf:
+        autoremove: true
+
+    - name: Add CUDA repo
+      yum_repository:
+        baseurl: https://developer.download.nvidia.com/compute/cuda/repos/fedora33/x86_64/cuda-fedora33.repo
+
+    - name: Add GitHub CLI
+      yum_repository:
+        baseurl: https://cli.github.com/packages/rpm/gh-cli.repo
