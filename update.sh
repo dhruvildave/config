@@ -51,18 +51,25 @@ unset name
 # Flatpak
 yellow "flatpak"
 [[ -x "$(command -v flatpak)" ]] &&
-    sudo flatpak update -y
+    flatpak update -y
 
 # NodeJS
 if [[ -x "$(command -v node | grep -w nvm)" ]]; then
     yellow "NodeJS" &&
         ver="$(node --version)" &&
         . "$NVM_DIR/nvm.sh" &&
-        nvm install --lts &&
+        nvm install node &&
         if [[ "$(node --version)" != "$ver" ]]; then
             nvm uninstall "$ver" &&
                 nvm use node &&
+                npm i -g yarn pnpm &&
+                pnpm add -g typescript prettier nodemon serve parcel-bundler &&
                 unset ver
         fi
 fi
+
+yellow "Podman" &&
+    [ -f "$HOME/Documents/update-podman.sh" ] &&
+    sudo "$HOME/Documents/update-podman.sh"
+
 unset -f yellow
