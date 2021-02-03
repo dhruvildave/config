@@ -24,6 +24,8 @@ alias clip="xclip -sel c"
 
 alias cat="bat"
 
+alias aws="docker run -it --rm amazon/aws-cli"
+
 alias podman="sudo podman"
 
 alias pg='sudo podman run -it --rm -p 5432:5432 -e "POSTGRES_PASSWORD=Fidelium.18" postgres'
