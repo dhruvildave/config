@@ -42,6 +42,7 @@
           # - obs-studio
           - p7zip
           - pandoc
+          - poetry
           - pgcli
           - qemu
           - radare2
