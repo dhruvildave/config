@@ -99,7 +99,8 @@ bind "TAB: menu-complete"
 # PS1+="[\033[00m\]\033[01;34m\w\033[00m\]\033[01;32m] \033[01;32m(\033[00m\]\033[01;37m\$?\033[00m\]\033[01;32m)\033[00m\]\n"
 # PS1+="\033[01;32m└─\033[00m\]\033[01;34m\]$\033[00m\] "
 # export PS1
-export PS1="\033[01;35m[\033[00m\[\033[01;35m\]\u@\h\[\033[00m\] \[\033[01;36m\]\W\[\033[00m\]\033[01;35m]\033[00m$ "
+# export PS1="\033[01;35m[\033[00m\[\033[01;35m\]\u@\h\[\033[00m\] \[\033[01;36m\]\W\[\033[00m\]\033[01;35m]\033[00m$ "
+export PS1="\[\e[32m\]\u\[\e[m\] \[\e[33m\]\W\[\e[m\] > "
 
 # Deno
 if [[ -f "/home/dhruvil/.deno/bin/deno" ]]; then
@@ -113,6 +114,8 @@ eval "$(gh completion -s bash)"
 
 # k8s
 eval "$(minikube completion bash)"
+
+eval "$(poetry completions bash)"
 
 # Containers
 # [[ -f "$HOME/containers/.docker_aliases.sh" ]] && . $HOME/containers/.docker_aliases.sh
@@ -163,25 +166,8 @@ man() {
         command man "$@"
 }
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/dhruvil/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/dhruvil/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/dhruvil/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 source "$HOME/.cargo/env"
 eval "$(rustup completions bash)"
 eval "$(rustup completions bash cargo)"
+
+eval "$(kubectl completion bash)"
