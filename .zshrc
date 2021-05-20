@@ -80,7 +80,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PROMPT=$'%B%F{blue}%n%B%F{reset} %1~ %F{blue}>%F{reset} '
+    PROMPT=$'%B%F{blue}%n%F{reset} %1~ %F{blue}>%b%F{reset} '
 
     # enable syntax-highlighting
     if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
