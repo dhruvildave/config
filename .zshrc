@@ -10,6 +10,7 @@ setopt nonomatch           # hide error message if there is no match for the pat
 setopt notify              # report the status of background jobs immediately
 setopt numericglobsort     # sort filenames numerically when it makes sense
 setopt promptsubst         # enable command substitution in prompt
+setopt menu_complete       # select menu options on pressing tab
 
 WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 
@@ -33,6 +34,8 @@ autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
 
 # History configurations
 HISTFILE=~/.zsh_history
@@ -42,7 +45,7 @@ setopt hist_expire_dups_first # delete duplicates first when HISTFILE size excee
 setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
-#setopt share_history         # share command history data
+# setopt share_history          # share command history data
 
 # force zsh to show the complete history
 alias history="history 0"
@@ -77,8 +80,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.blue)}%n%(#.💀.㉿)%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
-    RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+    PROMPT=$'%B%F{blue}%n%B%F{reset} %1~ %F{blue}>%F{reset} '
 
     # enable syntax-highlighting
     if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
@@ -131,14 +133,14 @@ if [ "$color_prompt" = yes ]; then
 	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
     fi
 else
-    PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%# '
+    PROMPT='%n@%m:%~%# '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    TERM_TITLE='\e]0;${debian_chroot:+($debian_chroot)}%n@%m: %~\a'
+    TERM_TITLE='\e]0;%n@%m: %~\a'
     ;;
 *)
     ;;
@@ -188,6 +190,22 @@ fi
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+alias R="R --no-save"
+alias py3="python3"
+alias r="ranger"
+alias data="cd /mnt/DATA"
+alias codes="data; cd Documents/codes"
+alias clg="data; cd Documents/clg"
+alias ref="codes; cd reference-books"
+alias py="ipython3 || python3"
+alias jl="jupyter-lab"
+alias ca="conda activate"
+alias clip="xclip -sel c"
+alias cat="bat"
+alias aws="docker run -it --rm amazon/aws-cli"
+alias podman="sudo podman"
+alias pg='sudo podman run -it --rm -p 5432:5432 -e "POSTGRES_PASSWORD=Fidelium.18" timescale/timescaledb-postgis:latest-pg13'
+alias mssql='sudo podman run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Fidelium.18" mcr.microsoft.com/mssql/server'
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -195,3 +213,61 @@ if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     # change suggestion color
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 fi
+
+# Deno
+if [[ -f "/home/dhruvil/.deno/bin/deno" ]]; then
+    export DENO_INSTALL="/home/dhruvil/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit
+compinit -u
+
+source "$HOME/.cargo/env"
+
+man() {
+    LESS_TERMCAP_mb=$'\e[1;37m' \
+        LESS_TERMCAP_md=$'\e[1;34m' \
+        LESS_TERMCAP_so=$'\e[01;36m' \
+        LESS_TERMCAP_us=$'\e[01;35m' \
+        LESS_TERMCAP_me=$'\e[0m' \
+        LESS_TERMCAP_se=$'\e[0m' \
+        LESS_TERMCAP_ue=$'\e[0m' \
+        GROFF_NO_SGR=1 \
+        command man "$@"
+}
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/dhruvil/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/dhruvil/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/dhruvil/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# User specific environment
+if ! [[ "$PATH" =~ $HOME/go/bin ]]; then
+    PATH="$HOME/go/bin:$PATH"
+fi
+export PATH
+
+# tmux
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    exec tmux
+fi
+
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=\$vcs_info_msg_0_
+zstyle ':vcs_info:git:*' formats '%B%F{green}(%b)%r%f'
+zstyle ':vcs_info:*' enable git
