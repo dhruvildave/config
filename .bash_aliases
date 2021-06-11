@@ -28,6 +28,6 @@ alias aws="docker run -it --rm amazon/aws-cli"
 
 alias podman="sudo podman"
 
-alias pg='sudo podman run -it --rm -p 5432:5432 -e "POSTGRES_PASSWORD=Fidelium.18" postgres'
+alias pg='sudo podman run -it --rm -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-13" postgres'
 
-alias mssql='sudo podman run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Fidelium.18" mcr.microsoft.com/mssql/server'
+alias mssql='sudo podman run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=tough-pwd-13" mcr.microsoft.com/mssql/server'
