@@ -204,8 +204,8 @@ alias clip="xclip -sel c"
 alias cat="bat"
 alias aws="docker run -it --rm amazon/aws-cli"
 alias podman="sudo podman"
-alias pg='sudo podman run -it --rm -p 5432:5432 -e "POSTGRES_PASSWORD=Fidelium.18" timescale/timescaledb-postgis:latest-pg13'
-alias mssql='sudo podman run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Fidelium.18" mcr.microsoft.com/mssql/server'
+alias pg='sudo podman run -it --rm -p 5432:5432 -e "POSTGRES_PASSWORD=tough_pwd_13" timescale/timescaledb-postgis:latest-pg13'
+alias mssql='sudo podman run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=tough_pwd_13" mcr.microsoft.com/mssql/server'
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
