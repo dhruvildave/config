@@ -2,7 +2,7 @@
 # see /usr/share/doc/zsh/examples/zshrc for examples
 
 setopt autocd              # change directory just by typing its name
-#setopt correct            # auto correct mistakes
+setopt correct             # auto correct mistakes
 setopt interactivecomments # allow comments in interactive mode
 setopt ksharrays           # arrays start at 0
 setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
@@ -199,13 +199,18 @@ alias clg="data; cd Documents/clg"
 alias ref="codes; cd reference-books"
 alias py="ipython3 || python3"
 alias jl="jupyter-lab"
+alias code="code-insiders"
 alias ca="conda activate"
 alias clip="xclip -sel c"
-alias cat="bat"
-alias aws="docker run -it --rm amazon/aws-cli"
+alias cat="batcat"
+alias aws="docker run -it --rm -v "$PWD":/aws amazon/aws-cli"
 alias podman="sudo podman"
-alias pg='sudo podman run -it --rm -p 5432:5432 -e "POSTGRES_PASSWORD=tough_pwd_13" timescale/timescaledb-postgis:latest-pg13'
-alias mssql='sudo podman run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=tough_pwd_13" mcr.microsoft.com/mssql/server'
+alias pg='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
+alias pg-gis='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgis/postgis'
+alias pg-ts-gis='docker run -it --rm --name pg-ts-gis -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" timescale/timescaledb-ha:pg13-latest'
+alias mssql='docker run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=tough-pwd-13" mcr.microsoft.com/mssql/server'
+alias jl-ds="docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem"
+alias jl-spark="docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem"
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -253,9 +258,18 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # User specific environment
 if ! [[ "$PATH" =~ $HOME/go/bin ]]; then
     PATH="$HOME/go/bin:$PATH"
+fi
+export PATH
+
+if ! [[ "$PATH" =~ $HOME/.local/bin ]]; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 export PATH
 
@@ -264,6 +278,9 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && 
     exec tmux
 fi
 
+# .NET Core
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
+
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
@@ -271,3 +288,7 @@ setopt prompt_subst
 RPROMPT=\$vcs_info_msg_0_
 zstyle ':vcs_info:git:*' formats '%B%F{green}(%b)%r%f'
 zstyle ':vcs_info:*' enable git
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
