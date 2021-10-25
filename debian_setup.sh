@@ -76,7 +76,7 @@ if [ -x "$(command -v curl)" ]; then
     sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
     rm -f packages.microsoft.gpg
     sudo apt update
-    sudo apt install -y code
+    sudo apt install -y apt-transport-https code
 
     curl -O https://raw.githubusercontent.com/dhruvildave/config/master/update.sh
     chmod 0755 update.sh
