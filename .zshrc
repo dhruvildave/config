@@ -187,6 +187,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
+alias ...="../../"
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
@@ -204,13 +205,16 @@ alias ca="conda activate"
 alias clip="xclip -sel c"
 alias cat="batcat"
 alias aws="docker run -it --rm -v "$PWD":/aws amazon/aws-cli"
-alias podman="sudo podman"
+# alias podman="sudo podman"
 alias pg='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
 alias pg-gis='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgis/postgis'
-alias pg-ts-gis='docker run -it --rm --name pg-ts-gis -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" timescale/timescaledb-ha:pg13-latest'
+alias pg-ts-gis='docker run -it --rm --name pg-ts-gis -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" timescale/timescaledb-ha:pg14-latest'
 alias mssql='docker run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=tough-pwd-13" mcr.microsoft.com/mssql/server'
-alias jl-ds="docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem"
-alias jl-spark="docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem"
+alias n4j='docker run -it --rm --name n4j -p 7474:7474 -p 7687:7687 -v "$PWD":/usr/src:z -w /usr/src -e "NEO4J_AUTH=none" neo4j'
+alias jl-ds-v='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-ds -v ~/ssl:/etc/ssl -v "$PWD":/home/jovyan -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias jl-spark-v='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -v "$PWD":/home/jovyan -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias jl-ds='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-ds -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias jl-spark='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -280,6 +284,8 @@ fi
 
 # .NET Core
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
+export S3_ACCESS_KEY=CNB093O9G0NWDWBZFRC5
+export S3_SECRET_KEY=zvsD5tJHUxWeipZeUTcj8J6OwaNa9U7RZdqwZFmu
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
@@ -292,3 +298,6 @@ zstyle ':vcs_info:*' enable git
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
