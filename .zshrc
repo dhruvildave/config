@@ -206,15 +206,17 @@ alias clip="xclip -sel c"
 alias cat="batcat"
 alias aws="docker run -it --rm -v "$PWD":/aws amazon/aws-cli"
 # alias podman="sudo podman"
+alias trino='docker run -it --rm -p 8080:8080 -v "$PWD":/usr/src -w /usr/src --name trino trinodb/trino'
 alias pg='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
+alias pg-v='docker run -it --rm --name pg -v "$PWD":/usr/src:z -v "$PWD"/pg_data:/var/lib/postgresql/data:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
 alias pg-gis='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgis/postgis'
 alias pg-ts-gis='docker run -it --rm --name pg-ts-gis -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" timescale/timescaledb-ha:pg14-latest'
 alias mssql='docker run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=tough-pwd-13" mcr.microsoft.com/mssql/server'
-alias n4j='docker run -it --rm --name n4j -p 7474:7474 -p 7687:7687 -v "$PWD":/usr/src:z -w /usr/src -e "NEO4J_AUTH=none" -e "NEO4JLABS_PLUGINS=[\"apoc\", \"graph-data-science\"]" -e NEO4J_apoc_export_file_enabled=true -e NEO4J_apoc_import_file_enabled=true neo4j'
-alias jl-ds-v='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-ds -v ~/ssl:/etc/ssl -v "$PWD":/home/jovyan -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
-alias jl-spark-v='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -v "$PWD":/home/jovyan -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
-alias jl-ds='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-ds -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
-alias jl-spark='docker run -it --rm --gpus all -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias n4j='docker run -it --rm --name n4j -p 7474:7474 -p 7687:7687 -v "$PWD":/usr/src:z -w /usr/src -e "NEO4J_AUTH=none" -e "NEO4JLABS_PLUGINS=[\"apoc\", \"graph-data-science\", \"n10s\"]" -e "NEO4J_apoc_export_file_enabled=true" -e "NEO4J_apoc_import_file_enabled=true" neo4j'
+alias jl-ds-v='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-ds -v ~/ssl:/etc/ssl -v "$PWD":/home/jovyan -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias jl-spark-v='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -v "$PWD":/home/jovyan -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias jl-ds='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-ds -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias jl-spark='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -284,8 +286,6 @@ fi
 
 # .NET Core
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
-export S3_ACCESS_KEY=CNB093O9G0NWDWBZFRC5
-export S3_SECRET_KEY=zvsD5tJHUxWeipZeUTcj8J6OwaNa9U7RZdqwZFmu
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
