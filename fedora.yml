@@ -32,7 +32,7 @@
           - gtk4-devel
           - ibm-plex-fonts-all
           - java-11-openjdk-devel
-          - kubernetes
+          # - kubernetes
           - litecli
           - lldb
           - make
@@ -42,14 +42,15 @@
           # - obs-studio
           - p7zip
           - pandoc
-          - poetry
+          # - poetry
           - pgcli
-          - qemu
-          - radare2
+          # - qemu
+          # - radare2
+          - R
           - rstudio-desktop
           - sqlite
           - texlive-xetex
-          - tmux
+          # - tmux
           - valgrind
           - vim
           - xournalpp
@@ -69,9 +70,9 @@
       dnf:
         autoremove: true
 
-    - name: Add CUDA repo
-      yum_repository:
-        baseurl: https://developer.download.nvidia.com/compute/cuda/repos/fedora33/x86_64/cuda-fedora33.repo
+    # - name: Add CUDA repo
+    #   yum_repository:
+    #     baseurl: https://developer.download.nvidia.com/compute/cuda/repos/fedora33/x86_64/cuda-fedora33.repo
 
     - name: Add GitHub CLI
       yum_repository:
