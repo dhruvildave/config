@@ -70,6 +70,20 @@ if [[ -x "$(command -v node | grep -w nvm)" ]]; then
         fi
 fi
 
+# Deno
+if [[ -x "$(command -v deno)" ]]; then
+    yellow "Deno"
+    deno upgrade
+fi
+
+# Rust
+if [[ -x "$(command -v rustup)" ]]; then
+    yellow "Rust"
+    rustup self update
+    rustup update
+fi
+
+# Docker
 [[ -x "$(command -v docker)" ]] &&
     yellow "Docker" &&
     for i in $(docker images | awk 'NR > 1 { print $1":"$2 }'); do
@@ -77,6 +91,7 @@ fi
     done &&
     docker system prune -f
 
+# Podman
 # yellow "Podman" &&
 #     [ -f "$HOME/Documents/update-podman.sh" ] &&
 #     sudo "$HOME/Documents/update-podman.sh"
