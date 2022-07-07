@@ -22,9 +22,9 @@ bindkey -e                                        # emacs key bindings
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^[[3;5~' kill-word                       # ctrl + Supr
 bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[C' forward-word                       # ctrl + ->
+# bindkey '^[[C' forward-word                       # ctrl + ->
 bindkey '^[[1;5D' backward-word                   # ctrl + <-
-bindkey '^[[D' backward-word                      # ctrl + <-
+# bindkey '^[[D' backward-word                      # ctrl + <-
 bindkey '^[[5~' beginning-of-buffer-or-history    # page up
 bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[Z' undo                               # shift + tab undo last action
@@ -203,7 +203,7 @@ alias jl="jupyter-lab"
 alias code="code-insiders"
 alias ca="conda activate"
 alias clip="xclip -sel c"
-alias cat="batcat"
+alias cat="bat"
 alias aws="docker run -it --rm -v "$PWD":/aws amazon/aws-cli"
 # alias podman="sudo podman"
 alias trino='docker run -it --rm -p 8080:8080 -v "$PWD":/usr/src -w /usr/src --name trino trinodb/trino'
@@ -235,7 +235,7 @@ fpath=(~/.zsh $fpath)
 autoload -Uz compinit
 compinit -u
 
-source "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 man() {
     LESS_TERMCAP_mb=$'\e[1;37m' \
@@ -249,26 +249,12 @@ man() {
         command man "$@"
 }
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/dhruvil/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/dhruvil/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/dhruvil/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # User specific environment
+if ! [[ "$PATH" =~ /usr/local/go/bin ]]; then
+    PATH="/usr/local/go/bin:$PATH"
+fi
+export PATH
+
 if ! [[ "$PATH" =~ $HOME/go/bin ]]; then
     PATH="$HOME/go/bin:$PATH"
 fi
@@ -300,4 +286,40 @@ zstyle ':vcs_info:*' enable git
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/dhruvil/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/dhruvil/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/dhruvil/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# pnpm
+export PNPM_HOME="/home/dhruvil/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+# pip zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null ))
+}
+compctl -K _pip_completion /home/dhruvil/miniconda3/envs/arrow/bin/python -m pip
+# pip zsh completion end
