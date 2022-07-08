@@ -38,7 +38,7 @@ esac
 # Conda
 [[ -x "$(command -v conda)" ]] &&
     yellow "conda->base" &&
-    conda update --all -y -n base &&
+    conda update --all -y -n base -c conda-forge &&
     [[ -d "$HOME/miniconda3/" ]] &&
     for i in "$HOME/miniconda3/envs"/*; do
         [[ -e "$i" ]] || break # No user defined envs
@@ -90,6 +90,11 @@ fi
         docker pull "$i"
     done &&
     docker system prune -f
+
+# Deno
+[[ -x "$(command -v deno)" ]] &&
+    yellow "Deno" &&
+    deno upgrade
 
 # Podman
 # yellow "Podman" &&
