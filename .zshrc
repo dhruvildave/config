@@ -206,10 +206,12 @@ alias clip="xclip -sel c"
 alias cat="bat"
 alias aws="docker run -it --rm -v "$PWD":/aws amazon/aws-cli"
 # alias podman="sudo podman"
-alias trino='docker run -it --rm -p 8080:8080 -v "$PWD":/usr/src -w /usr/src --name trino trinodb/trino'
+alias trino='docker run -it --rm -p 8080:8080 -v "$PWD":/usr/src:z -w /usr/src --name trino trinodb/trino'
+alias mysql='docker run -it --rm --name mysql -v "$PWD":/usr/src:z -w /usr/src -p 3306:3306 -p 33060:33060 -e "MYSQL_ROOT_PASSWORD=tough-pwd-pg" mysql'
 alias pg='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
 alias pg-v='docker run -it --rm --name pg -v "$PWD":/usr/src:z -v "$PWD"/pg_data:/var/lib/postgresql/data:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
 alias pg-gis='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgis/postgis'
+alias pg-gis-v='docker run -it --rm --name pg -v "$PWD":/usr/src:z -v "$PWD"/pg_data:/var/lib/postgresql/data:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgis/postgis'
 alias pg-ts-gis='docker run -it --rm --name pg-ts-gis -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" timescale/timescaledb-ha:pg14-latest'
 alias mssql='docker run -it --rm -p 1433:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=tough-pwd-13" mcr.microsoft.com/mssql/server'
 alias n4j='docker run -it --rm --name n4j -p 7474:7474 -p 7687:7687 -v "$PWD":/usr/src:z -w /usr/src -e "NEO4J_AUTH=none" -e "NEO4JLABS_PLUGINS=[\"apoc\", \"graph-data-science\", \"n10s\"]" -e "NEO4J_apoc_export_file_enabled=true" -e "NEO4J_apoc_import_file_enabled=true" neo4j'
@@ -217,6 +219,8 @@ alias jl-ds-v='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_L
 alias jl-spark-v='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -v "$PWD":/home/jovyan -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
 alias jl-ds='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-ds -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
 alias jl-spark='docker run -it --rm -u root -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes --name jl-spark -v ~/ssl:/etc/ssl -p 8888:8888 jupyter/all-spark-notebook start-notebook.sh --NotebookApp.certfile /etc/ssl/localhost+2.pem --NotebookApp.keyfile /etc/ssl/localhost+2-key.pem'
+alias grafana='docker run -it --rm -p 3000:3000 grafana/grafana-enterprise'
+# alias sqlfluff='docker run -it --rm -v "$PWD":/sql sqlfluff/sqlfluff'
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -286,26 +290,6 @@ zstyle ':vcs_info:*' enable git
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 autoload -U +X bashcompinit && bashcompinit
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/dhruvil/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/dhruvil/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/dhruvil/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 
 # pnpm
 export PNPM_HOME="/home/dhruvil/.local/share/pnpm"
