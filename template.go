@@ -6,7 +6,10 @@ import (
 	"os"
 )
 
-var buf = bufio.NewReadWriter(bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout))
+var buf = bufio.NewReadWriter(
+	bufio.NewReader(os.Stdin),
+	bufio.NewWriter(os.Stdout),
+)
 
 func soln() {
 	var n int
