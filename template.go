@@ -71,15 +71,16 @@ var buf buffer = buffer{
 	),
 }
 
-func soln() {}
+func soln() {
+}
 
 func main() {
 	defer buf.Flush()
 
-	t := 1
+	t := int64(1)
 	buf.read(&t) // comment this if only one test case
 
-	for i := 0; i < t; i++ {
+	for i := 0; i < int(t); i++ {
 		soln()
 	}
 }
