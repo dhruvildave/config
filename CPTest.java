@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class Main {
     private static final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private static final BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
 
