@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-type buffer struct {
+type Buffer struct {
 	*bufio.ReadWriter
 }
 
-func (b *buffer) read(v any) {
+func (b *Buffer) In(v any) {
 	s, _ := b.ReadString('\n')
 	y := strings.Fields(s)
 
@@ -45,7 +45,7 @@ func (b *buffer) read(v any) {
 	}
 }
 
-func (b *buffer) write(v any) {
+func (b *Buffer) Out(v any) {
 	var y string
 
 	switch x := v.(type) {
@@ -64,7 +64,7 @@ func (b *buffer) write(v any) {
 	buf.WriteString(y)
 }
 
-var buf buffer = buffer{
+var buf Buffer = Buffer{
 	bufio.NewReadWriter(
 		bufio.NewReader(os.Stdin),
 		bufio.NewWriter(os.Stdout),
@@ -78,7 +78,7 @@ func main() {
 	defer buf.Flush()
 
 	t := int64(1)
-	buf.read(&t) // comment this if only one test case
+	buf.In(&t) // comment this if only one test case
 
 	for i := 0; i < int(t); i++ {
 		soln()
