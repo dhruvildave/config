@@ -1,5 +1,12 @@
-# ~/.zshrc file for zsh non-login shells.
-# see /usr/share/doc/zsh/examples/zshrc for examples
+#!/usr/bin/env zsh
+
+# pnpm
+export PNPM_HOME="/Users/tushar/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 setopt autocd              # change directory just by typing its name
 setopt correct             # auto correct mistakes
@@ -11,23 +18,6 @@ setopt notify              # report the status of background jobs immediately
 setopt numericglobsort     # sort filenames numerically when it makes sense
 setopt promptsubst         # enable command substitution in prompt
 setopt menu_complete       # select menu options on pressing tab
-
-WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
-
-# hide EOL sign ('%')
-export PROMPT_EOL_MARK=""
-
-# configure key keybindings
-bindkey -e                                        # emacs key bindings
-bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-# bindkey '^[[C' forward-word                       # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
-# bindkey '^[[D' backward-word                      # ctrl + <-
-bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-bindkey '^[[6~' end-of-buffer-or-history          # page down
-bindkey '^[[Z' undo                               # shift + tab undo last action
 
 # enable completion features
 autoload -Uz compinit
@@ -51,7 +41,7 @@ setopt hist_verify            # show command with history expansion to user befo
 alias history="history 0"
 
 # make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -162,6 +152,7 @@ precmd() {
 }
 
 # enable color support of ls, less and man, and also add handy aliases
+alias ls="ls --color"
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -202,18 +193,19 @@ alias ref="codes; cd reference-books"
 alias mbh="ref; cd mahābhārata/uoft"
 alias py="ipython3 || python3"
 alias jl="jupyter-lab"
-alias code="code-insiders"
+# alias code="code-insiders"
 alias ca="conda activate"
 alias clip="xclip -sel c"
-alias cat="bat"
-alias aws="docker run -it --rm -v "$PWD":/aws amazon/aws-cli"
+alias nvim="lvim"
+# alias cat="bat"
+# alias aws="docker run -it --rm -v "$PWD":/aws amazon/aws-cli"
 # alias podman="sudo podman"
 alias trino='docker run -it --rm -p 8080:8080 -v "$PWD":/usr/src:z -w /usr/src --name trino trinodb/trino'
 alias mysql='docker run -it --rm --name mysql -v "$PWD":/usr/src:z -w /usr/src -p 3306:3306 -p 33060:33060 -e "MYSQL_ROOT_PASSWORD=tough-pwd-pg" mysql'
 alias pg='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
 # https://kafka.apache.org/quickstart
 # https://developer.confluent.io/get-started/java/
-alias kafka='docker run -it --rm -w /opt/bitnami/kafka -p 9092:9092 --name kafka bitnami/kafka bash'
+alias kafka='docker run -it --rm -p 9092:9092 --name kafka apache/kafka'
 alias pg-v='docker run -it --rm --name pg -v "$PWD":/usr/src:z -v "$PWD"/pg_data:/var/lib/postgresql/data:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgres'
 alias pg-gis='docker run -it --rm --name pg -v "$PWD":/usr/src:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgis/postgis'
 alias pg-gis-v='docker run -it --rm --name pg -v "$PWD":/usr/src:z -v "$PWD"/pg_data:/var/lib/postgresql/data:z -w /usr/src -p 5432:5432 -e "POSTGRES_PASSWORD=tough-pwd-pg" postgis/postgis'
@@ -233,18 +225,6 @@ if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     # change suggestion color
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 fi
-
-# Deno
-if [[ -f "/home/dhruvil/.deno/bin/deno" ]]; then
-    export DENO_INSTALL="/home/dhruvil/.deno"
-    export PATH="$DENO_INSTALL/bin:$PATH"
-fi
-
-fpath=(~/.zsh $fpath)
-autoload -Uz compinit
-compinit -u
-
-[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 man() {
     LESS_TERMCAP_mb=$'\e[1;37m' \
@@ -274,14 +254,6 @@ if ! [[ "$PATH" =~ $HOME/.local/bin ]]; then
 fi
 export PATH
 
-# tmux
-if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    exec tmux
-fi
-
-# .NET Core
-export DOTNET_CLI_TELEMETRY_OPTOUT=true
-
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
@@ -294,47 +266,13 @@ zstyle ':vcs_info:*' enable git
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
-autoload -U +X bashcompinit && bashcompinit
-
-# pnpm
-export PNPM_HOME="/home/dhruvil/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
-
-# JetBrains
-export JB_HOME="/home/dhruvil/.local/share/JetBrains/Toolbox/scripts"
-export PATH="$PATH:$JB_HOME"
-
-# pip zsh completion start
-function _pip_completion {
-  local words cword
-  read -Ac words
-  read -cn cword
-  reply=( $( COMP_WORDS="$words[*]" \
-             COMP_CWORD=$(( cword-1 )) \
-             PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null ))
-}
-compctl -K _pip_completion /home/dhruvil/miniconda3/envs/arrow/bin/python -m pip
-# pip zsh completion end
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/dhruvil/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/dhruvil/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/dhruvil/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/dhruvil/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 PATH="$(python3 -c 'import os; print(":".join(set(os.environ["PATH"].split(":"))))')"
 export PATH
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+compinit
+
+[ -x "$(command -v quarkus)" ] && source <(quarkus completion)
+[ -x "$(command -v deno)" ] && source <(deno completions zsh)
+[ -x "$(command -v buf)" ] && source <(buf completion zsh)
