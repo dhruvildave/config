@@ -56,7 +56,6 @@ fn run(one_time: bool) {
     let w = &mut BufWriter::new(io::stdout());
 
     let n = if one_time { 1 } else { read(r) };
-
     for _ in 0..n {
         soln(r, w);
     }
