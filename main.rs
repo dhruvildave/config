@@ -55,18 +55,15 @@ fn run(one_time: bool) {
     let r = &mut BufReader::new(io::stdin());
     let w = &mut BufWriter::new(io::stdout());
 
-    if one_time {
+    let n = if one_time { 1 } else { read(r) };
+
+    for _ in 0..n {
         soln(r, w);
-    } else {
-        let n = read(r);
-        for _ in 0..n {
-            soln(r, w);
-        }
     }
 }
 
 fn main() {
     const ONE_TIME: bool = true;
 
-    run(!ONE_TIME);
+    run(ONE_TIME);
 }
