@@ -22,13 +22,15 @@ where
     let mut line = String::new();
     r.read_line(&mut line).unwrap();
 
-    return line
+    let v = line
         .trim()
         .splitn(n, ' ')
         .map(|x| {
             return x.parse().unwrap();
         })
-        .collect();
+        .collect::<Vec<T>>();
+    assert_eq!(v.len(), n);
+    return v;
 }
 
 fn write<T>(w: &mut BufWriter<Stdout>, x: T)
@@ -42,11 +44,15 @@ fn write_vec<T>(w: &mut BufWriter<Stdout>, v: &Vec<T>, n: usize)
 where
     T: fmt::Display,
 {
-    let mut l: Vec<String> = Vec::with_capacity(n);
-    for i in &v[0..n] {
-        l.push(i.to_string());
-    }
-    w.write(l.join(" ").as_bytes()).unwrap();
+    assert_eq!(v.len(), n);
+    let l = v
+        .iter()
+        .map(|x| {
+            return x.to_string();
+        })
+        .collect::<Vec<String>>()
+        .join(" ");
+    w.write(l.as_bytes()).unwrap();
 }
 
 fn run(one_time: bool) {
