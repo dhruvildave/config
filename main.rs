@@ -63,6 +63,5 @@ fn run(one_time: bool) {
 
 fn main() {
     const ONE_TIME: bool = true;
-
     run(ONE_TIME);
 }
