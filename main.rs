@@ -1,3 +1,7 @@
+//! Competitive Programming Template Code
+
+#![allow(unused)]
+
 use std::{
     fmt,
     io::{self, BufRead, BufReader, BufWriter, Stdin, Stdout, Write},
@@ -11,7 +15,7 @@ where
 {
     let mut line = String::new();
     r.read_line(&mut line).unwrap();
-    return line.trim().parse().unwrap();
+    line.trim().parse().unwrap()
 }
 
 fn read_vec<T>(r: &mut BufReader<Stdin>, n: usize) -> Vec<T>
@@ -25,34 +29,30 @@ where
     let v = line
         .trim()
         .splitn(n, ' ')
-        .map(|x| {
-            return x.parse().unwrap();
-        })
+        .map(|x| x.parse().unwrap())
         .collect::<Vec<T>>();
     assert_eq!(v.len(), n);
-    return v;
+    v
 }
 
 fn write<T>(w: &mut BufWriter<Stdout>, x: T)
 where
     T: fmt::Display,
 {
-    w.write(x.to_string().as_bytes()).unwrap();
+    w.write_all(x.to_string().as_bytes()).unwrap();
 }
 
-fn write_vec<T>(w: &mut BufWriter<Stdout>, v: &Vec<T>, n: usize)
+fn write_vec<T>(w: &mut BufWriter<Stdout>, v: &[T], n: usize)
 where
     T: fmt::Display,
 {
     assert_eq!(v.len(), n);
     let l = v
         .iter()
-        .map(|x| {
-            return x.to_string();
-        })
-        .collect::<Vec<String>>()
+        .map(|x| x.to_string())
+        .collect::<Vec<_>>()
         .join(" ");
-    w.write(l.as_bytes()).unwrap();
+    w.write_all(l.as_bytes()).unwrap();
 }
 
 fn run(one_time: bool) {
@@ -69,5 +69,5 @@ fn run(one_time: bool) {
 
 fn main() {
     const ONE_TIME: bool = true;
-    run(ONE_TIME);
+    run(!ONE_TIME);
 }
