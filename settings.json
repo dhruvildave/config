@@ -1,33 +1,26 @@
 {
-  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
   "C_Cpp.clang_format_sortIncludes": true,
-  "C_Cpp.updateChannel": "Insiders",
-  "debug.inlineValues": true,
-  "editor.fontFamily": "'IBM Plex Mono'",
-  "editor.fontSize": 18,
+  "debug.inlineValues": "auto",
+  "editor.fontSize": 16,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.largeFileOptimizations": true,
+  "editor.largeFileOptimizations": false,
   "editor.suggestSelection": "first",
   "explorer.confirmDragAndDrop": false,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "python.insidersChannel": "off",
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "python.venvPath": "~/.cache/pypoetry/virtualenvs",
+  "telemetry.telemetryLevel": "off",
   "window.restoreFullscreen": true,
-  "window.zoomLevel": 2,
-  "workbench.colorTheme": "GitHub Dark",
   "workbench.editor.closeOnFileDelete": true,
   "zenMode.hideLineNumbers": false,
   "html.format.wrapLineLength": 80,
-  "editor.renameOnType": true,
+  "editor.linkedEditing": true,
   "editor.autoIndent": "advanced",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -50,13 +43,96 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "java.semanticHighlighting.enabled": true,
-  "window.menuBarVisibility": "toggle",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "go.useLanguageServer": true,
   "julia.enableTelemetry": true,
   "python.languageServer": "Pylance",
-  "python.showStartPage": false
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "cmake.configureOnOpen": true,
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "workbench.colorTheme": "GitHub Dark Default",
+  "editor.fontLigatures": false,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
+  "terminal.integrated.commandsToSkipShell": ["language-julia.interrupt"],
+  "workbench.editorAssociations": {
+    "*.hex": "hexEditor.hexedit",
+    "*.ini": "hexEditor.hexedit",
+    "*.ipynb": "jupyter-notebook"
+  },
+  "gopls": {
+    "ui.codelenses": {
+      "upgrade_dependency": true,
+      "tidy": true
+    },
+    "ui.semanticTokens": true
+  },
+  "editor.renderLineHighlight": "none",
+  "go.toolsManagement.autoUpdate": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.inheritEnv": true,
+  "jupyter.interactiveWindowMode": "perFile",
+  "window.zoomLevel": 2,
+  "redhat.telemetry.enabled": true,
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "sourcery.token": "user_Cn3v2GZqRaEiXfrDVNZ5VabPJ0I1rOFsW_2kpNfb3iejCeKmnOoUYPRr4wc",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "julia.symbolCacheDownload": true,
+  "terminal.integrated.enablePersistentSessions": false,
+  "svelte.enable-ts-plugin": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "workbench.sideBar.location": "right",
+  "[starlark]": {
+    "editor.defaultFormatter": "BazelBuild.vscode-bazel"
+  },
+  "terraform.experimentalFeatures.prefillRequiredFields": true,
+  "terraform.codelens.referenceCount": true,
+  "lldb.library": "/Library/Developer/CommandLineTools/Library/PrivateFrameworks/LLDB.framework/Versions/A/LLDB",
+  "lldb.launch.expressions": "native",
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "aws.telemetry": false,
+  "markdown.updateLinksOnFileMove.enabled": "always",
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/.ammonite": true
+  },
+  "amazonQ.telemetry": false,
+  "makefile.configureOnOpen": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "github.copilot.chat.temporalContext.enabled": true,
+  "github.copilot.enable": {
+    "quarto": false,
+    "*": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "leetcode.workspaceFolder": "/Users/tushar/Documents/codes/java"
 }
