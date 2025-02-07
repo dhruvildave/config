@@ -91,7 +91,6 @@
     "jupyter-notebook": "left"
   },
   "editor.inlineSuggest.enabled": true,
-  "sourcery.token": "user_Cn3v2GZqRaEiXfrDVNZ5VabPJ0I1rOFsW_2kpNfb3iejCeKmnOoUYPRr4wc",
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
